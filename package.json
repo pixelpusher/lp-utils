@@ -1,0 +1,13 @@
+{
+    "name": "liveprinter-utils",
+    "description": "LivePrinter util classes",
+    "version": "1.0.0",
+    "sideEffects": true, // string sideeffects for reverse()
+    "type": "module",
+    "main": "./index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pixelpusher/lp-utils.git"
+      },
+    "author": "Evan Raskob <evan@flkr.com> (http://pixelist.info)"
+}

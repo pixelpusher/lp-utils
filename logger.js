@@ -10,10 +10,9 @@ export default class Logger
         debug: 3
     };
 
-    constructor()
+    constructor(level=Logger.DEBUG_LEVEL.info)
     {
-        this.debugLevel = Logger.DEBUG_LEVEL.info;
-
+        this.debugLevel = level;
     }
 
     log (text, level = Logger.debugLevel) {
@@ -23,18 +22,18 @@ export default class Logger
     }
 
     info (t) {
-        log(t, Logger.DEBUG_LEVEL.info);
+        this.log(t, Logger.DEBUG_LEVEL.info);
     }
     debug (t) {
-        log(t, Logger.DEBUG_LEVEL.debug);
+        this.log(t, Logger.DEBUG_LEVEL.debug);
     }
     
     warning(t) {
-        log(t, Logger.DEBUG_LEVEL.warning);
+        this.log(t, Logger.DEBUG_LEVEL.warning);
     }
 
     error (t) { 
-        log(t, Logger.DEBUG_LEVEL.error); 
+        this.log(t, Logger.DEBUG_LEVEL.error); 
     }
 }
     

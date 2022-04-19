@@ -1,5 +1,7 @@
 'use strict';
 
+import Scheduler from './scheduler.js';
+
 export { default as Logger } from './logger.js';
 
 export { default as Vector } from './vector.js';

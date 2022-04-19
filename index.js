@@ -4,6 +4,8 @@ export { default as Logger } from './logger.js';
 
 export { default as Vector } from './vector.js';
 
+export {default as Scheduler } from "./scheduler.js"; 
+
 /**
  * Strip GCode comments from text. Comments can be embedded in a line using parentheses () or for the remainder of a lineusing a semi-colon.
  * The semi-colon is not treated as the start of a comment when enclosed in parentheses.

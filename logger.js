@@ -3,37 +3,25 @@
 //
 export default class Logger
 {
-    static DEBUG_LEVEL = {
+    static LOG_LEVEL = {
         error: 0,
         warning: 1,
         info: 2,
         debug: 3
     };
 
-    constructor(level=Logger.DEBUG_LEVEL.info)
-    {
-        this.debugLevel = level;
-    }
+    static level = 0; // default
 
-    log (text, level = Logger.debugLevel) {
-        if (level <= Logger.debugLevel) {
-            console.log(text);
-        }
+    static debug (t) {
+        if (Logger.level >= Logger.LOG_LEVEL.debug) console.debug(t);
     }
-
-    info (t) {
-        this.log(t, Logger.DEBUG_LEVEL.info);
+    static info (t) {
+        if (Logger.level >= Logger.LOG_LEVEL.info) console.info(t);
+    }   
+    static warning(t) {
+        if (Logger.level >= Logger.LOG_LEVEL.warning) console.warn(t);
     }
-    debug (t) {
-        this.log(t, Logger.DEBUG_LEVEL.debug);
-    }
-    
-    warning(t) {
-        this.log(t, Logger.DEBUG_LEVEL.warning);
-    }
-
-    error (t) { 
-        this.log(t, Logger.DEBUG_LEVEL.error); 
+    static error (t) { 
+        if (Logger.level >= Logger.LOG_LEVEL.error) console.error(t);
     }
 }
-    

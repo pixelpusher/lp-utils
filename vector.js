@@ -253,7 +253,7 @@ export default class Vector {
      * @returns {Number} dot product (scalar)
      */
     static dot(v1, v2) {
-        return v1.axes.x * (v2.axes.x || 0) + v1.axes.y * (v2.axes.y || 0) + v1.axes.z * (v2.axes.z || 0);
+        return v1.axes.x * v2.axes.x + v1.axes.y * v2.axes.y + v1.axes.z * v2.axes.z;
     }
 
     /**
@@ -278,7 +278,7 @@ export default class Vector {
     static angleBetween(v1, v2) {
         // adapted from https://github.com/processing/p5.js/blob/v1.6.0/src/math/p5.Vector.js#L1574
 
-            const dotmagmag = Vector.dot(v1,v2) / (v1.mag() * v2.mag());
+        const dotmagmag = Vector.dot(v1,v2) / (v1.mag() * v2.mag());
         // Mathematically speaking: the dotmagmag variable will be between -1 and 1
         // inclusive. Practically though it could be slightly outside this range due
         // to floating-point rounding issues. This can make Math.acos return NaN.

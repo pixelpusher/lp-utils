@@ -1,5 +1,7 @@
 /**
  * A Vector object with optional fields (ex: x,y,z,e)
+ * Why write another one? Who knows. Probably a bad idea, should be merged with a better one.
+ * 
  * @class 
  * @constructor
  * @param {any} mapping object with fields to deep copy into this Vector
@@ -243,4 +245,50 @@ export default class Vector {
         }
         return v2;
     }
+
+    /**
+     * 
+     * @param {Vector} v1 
+     * @param {Vector} v2 
+     * @returns {Number} dot product (scalar)
+     */
+    static dot(v1, v2) {
+        return v1.axes.x * (v2.axes.x || 0) + v1.axes.y * (v2.axes.y || 0) + v1.axes.z * (v2.axes.z || 0);
+    }
+
+    /**
+     * 
+     * @param {Vector} v1 
+     * @param {Vector} v2 
+     * @returns {Vector} cross product
+     */
+    static cross(v1, v2) {
+        const x = v1.axes.y * v2.axes.z - v1.axes.z * v2.axes.y;
+        const y = v1.axes.z * v2.axes.x - v1.axes.x * v2.axes.z;
+        const z = v1.axes.x * v2.axes.y - v1.axes.y * v2.axes.x;
+        return new Vector(x,y,z);
+    }
+
+    /**
+     * 
+     * @param {Vector} v1
+     * @param {Vector} v2 
+     * @returns {Number} angle between in radians
+     */
+    static angleBetween(v1, v2) {
+        // adapted from https://github.com/processing/p5.js/blob/v1.6.0/src/math/p5.Vector.js#L1574
+
+            const dotmagmag = Vector.dot(v1,v2) / (v1.mag() * v2.mag());
+        // Mathematically speaking: the dotmagmag variable will be between -1 and 1
+        // inclusive. Practically though it could be slightly outside this range due
+        // to floating-point rounding issues. This can make Math.acos return NaN.
+        //
+        // Solution: we'll clamp the value to the -1,1 range
+        let angle;
+        angle = Math.acos(Math.min(1, Math.max(-1, dotmagmag)));
+        angle = angle * Math.sign(Vector.cross(v1,v2).axes.z || 1);
+        
+        return angle;
+    }
+
 }

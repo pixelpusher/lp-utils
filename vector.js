@@ -253,7 +253,7 @@ export default class Vector {
      * @returns {Number} dot product (scalar)
      */
     static dot(v1, v2) {
-        return v1.axes.x * v2.axes.x + v1.axes.y * v2.axes.y + v1.axes.z * v2.axes.z;
+        return (v1.axes.x * v2.axes.x + v1.axes.y * v2.axes.y + (v1.axes.z || 0) * (v2.axes.z || 0));
     }
 
     /**
@@ -263,8 +263,8 @@ export default class Vector {
      * @returns {Vector} cross product
      */
     static cross(v1, v2) {
-        const x = v1.axes.y * v2.axes.z - v1.axes.z * v2.axes.y;
-        const y = v1.axes.z * v2.axes.x - v1.axes.x * v2.axes.z;
+        const x = v1.axes.y * (v2.axes.z || 0) - (v1.axes.z || 0) * v2.axes.y;
+        const y = (v1.axes.z || 0) * v2.axes.x - v1.axes.x * (v2.axes.z || 0);
         const z = v1.axes.x * v2.axes.y - v1.axes.y * v2.axes.x;
         return new Vector(x,y,z);
     }
@@ -279,6 +279,7 @@ export default class Vector {
         // adapted from https://github.com/processing/p5.js/blob/v1.6.0/src/math/p5.Vector.js#L1574
 
         const dotmagmag = Vector.dot(v1,v2) / (v1.mag() * v2.mag());
+
         // Mathematically speaking: the dotmagmag variable will be between -1 and 1
         // inclusive. Practically though it could be slightly outside this range due
         // to floating-point rounding issues. This can make Math.acos return NaN.

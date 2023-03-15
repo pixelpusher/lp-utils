@@ -9,5 +9,8 @@
         "type": "git",
         "url": "git+https://github.com/pixelpusher/lp-utils.git"
       },
-    "author": "Evan Raskob <evan@flkr.com> (http://pixelist.info)"
+    "author": "Evan Raskob <evan@flkr.com> (http://pixelist.info)",
+    "scripts": {
+      "test": "node ./test.js" 
+    }
 }

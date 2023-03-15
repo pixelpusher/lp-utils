@@ -76,23 +76,29 @@ export default class Vector {
      * Magnitude squared of this vector as a scalar.
      * @returns {float} magnitude
      */
-    magSq(v0) {
-        const v1 = (v0 === undefined ? this : v0);
+    magSq() {
         let sumAxes = 0;
-        for (const v in v1.axes) {
-            sumAxes += v1.axes[v] * v1.axes[v];
+        for (const v in this.axes) {
+            sumAxes += this.axes[v] * this.axes[v];
         }
         return sumAxes;
     }
 
     /**
      * Magnitude of this vector as a scalar.
-     * @param {float} v0 new length of vector
      * @returns {float} magnitude
      */
-    mag(v0) {
-        const v1 = (v0 === undefined ? this : v0);
-        return Math.sqrt(v1.magSq());
+    mag() {
+        return Math.sqrt(this.magSq());
+    }
+
+    /**
+     * Scalar distance between Vectors.
+     * @param {Vector} v0 (required) first vector 
+     * @returns {float} scalar vector
+     */
+    distSelf(v0) {
+        return Vector.sub(this, v0).mag();
     }
 
     /**
@@ -101,9 +107,8 @@ export default class Vector {
      * @param {Vector} v1 (optional) second vector (if not included, will use this)
      * @returns {float} scalar vector
      */
-    dist(v0, v1) {
-        const v2 = (v1 === undefined ? this : v1);
-        return Vector.sub(v0, v2).mag();
+    static dist(v0, v1) {
+        return Vector.sub(v0, v1).mag();
     }
 
     /**
